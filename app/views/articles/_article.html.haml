@@ -1,0 +1,16 @@
+/ 記事たちの部分
+= link_to article_path(article) do
+  .card
+    .card_image
+      = image_tag 'eyecatch2.png'
+    .card_content
+      .card_title
+        = article.title
+      .card_heart
+        = image_tag 'heart.svg'
+        %span 23
+      .card_detail
+        = image_tag 'default-avatar.png'
+        %div
+          %p kota10317
+          %p= article.display_created_at
