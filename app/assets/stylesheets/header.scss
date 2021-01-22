@@ -2,6 +2,8 @@
 
 $avatar-size: 40px;
 $header-padding-y: 16px;
+$back-icon-size: 16px;
+
 
 .header {
   display: flex;
@@ -20,6 +22,18 @@ $header-padding-y: 16px;
     width: $avatar-size;
     height: $avatar-size;
     border-radius: 100%;
+  }
+  
+  &_logos {
+    min-width: 0;
+    display: flex;
+
+    img {
+      cursor: pointer;
+      width: $back-icon-size;
+      height: $back-icon-size;
+      margin: ($avatar-size - $back-icon-size) / 2 8px 0;
+    }
   }
 }
 
