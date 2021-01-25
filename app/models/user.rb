@@ -20,5 +20,19 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+        :recoverable, :rememberable, :validatable
+
+  #Userは記事を沢山もっている,user消えたら一緒にarticles消える
+  has_many :articles, dependent: :destroy
+
+  # Userが書いた記事だけ表示
+  def has_written?(article)
+    articles.exists?(id: article.id)
+  end
+
+  #userのemail先頭をdisplay_nameに
+  def display_name
+    self.email.split('@').first
+  end
+  
 end

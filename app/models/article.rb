@@ -3,10 +3,15 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :text
-#  title      :string
+#  content    :text             not null
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
   # バリデーションを追加
@@ -25,10 +30,18 @@ class Article < ApplicationRecord
   # 自分に作ったvalidates,titleとcontentの文字数合計
   validate :validate_title_and_content_length
 
+  #記事articlesから見たらuserは1つ
+  belongs_to :user
+
   # 投稿日を日本語化
   def display_created_at
     I18n.l(created_at, format: :default)
   end
+
+  def author_name
+    user.display_name
+  end
+  
 
   private
 
