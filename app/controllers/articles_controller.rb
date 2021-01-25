@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @comments = @article.comments
   end
 
   #userがログインしている時のアクション current_user
@@ -45,7 +46,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
   def article_params
     params.require(:article).permit(:title, :content)
   end
