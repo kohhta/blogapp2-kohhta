@@ -30,6 +30,9 @@ class Article < ApplicationRecord
   # 自分に作ったvalidates,titleとcontentの文字数合計
   validate :validate_title_and_content_length
 
+  #記事articlesから見たらuserは1つ単体
+  belongs_to :user
+
   # 投稿日を日本語化
   def display_created_at
     I18n.l(created_at, format: :default)
