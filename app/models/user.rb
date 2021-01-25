@@ -22,8 +22,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
 
-  #Userは記事を沢山もっている,user消えたら一緒にarticles消える
+  #Userは記事コメントを沢山もっている,消えたら一緒にarticles消える
   has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
 
   # Userが書いた記事だけ表示
   def has_written?(article)
