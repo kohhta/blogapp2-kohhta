@@ -28,6 +28,8 @@ class User < ApplicationRecord
 
   has_one :profile,dependent: :destroy
 
+  delegate :birthday, :gender, to: :profile, allow_nil: true
+
 
   # Userが書いた記事だけ表示
   def has_written?(article)
@@ -46,13 +48,13 @@ class User < ApplicationRecord
     profile&.nickname || self.email.split('@').first
   end
 
-  def birthday 
-    profile&.birthday
-  end
+  # def birthday 
+  #   profile&.birthday
+  # end
 
-  def gender
-    profile&.gender
-  end
+  # def gender
+  #   profile&.gender
+  # end
   
     #profile_controllerのedit
     def prepare_profile
