@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   has_one :profile,dependent: :destroy
 
-  delegate :birthday, :gender, to: :profile, allow_nil: true
+  delegate :birthday, :gender, :age, to: :profile, allow_nil: true
 
 
   # Userが書いた記事だけ表示
