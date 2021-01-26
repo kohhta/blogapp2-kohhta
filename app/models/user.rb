@@ -36,13 +36,26 @@ class User < ApplicationRecord
 
   #userのemail先頭をdisplay_nameに
   def display_name
-    self.email.split('@').first
+    # if profile && profile.nickname
+    #   profile.nickname
+    # else
+    #   self.email.split('@').first
+    # end
+
+    # ぼっち演算子 &. nillじゃない場合だけ実行
+    profile&.nickname || self.email.split('@').first
   end
 
-  #profile_controllerのedit
-  def prepare_profile
-    profile || build_profile
+  def birthday 
+    profile&.birthday
+  end
+
+  def gender
+    profile&.gender
   end
   
-  
+    #profile_controllerのedit
+    def prepare_profile
+      profile || build_profile
+    end
 end
