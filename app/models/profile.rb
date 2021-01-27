@@ -19,6 +19,7 @@
 class Profile < ApplicationRecord
   enum gender: { male: 0, female: 1, other: 2}
   belongs_to :user
+  has_one_attached :avatar
 
   # birthdayがnilの場合は不明 return '不明' unless birthday.present?
   def age
