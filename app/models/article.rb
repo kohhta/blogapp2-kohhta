@@ -3,7 +3,6 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :text             not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -16,7 +15,7 @@
 class Article < ApplicationRecord
   #記事のアイキャッチ
   has_one_attached :eyecatch
-
+  has_rich_text :content
 
   # バリデーションを追加
 
@@ -30,12 +29,6 @@ class Article < ApplicationRecord
   validates :title, format: { with: /\A(?!\@)/ }
   
   validates :content, presence: true
-  validates :content, length: { minimum: 2 }
-  validates :content, uniqueness: true
-  
-  # 自分に作ったvalidates,titleとcontentの文字数合計
-  validate :validate_title_and_content_length
-
 
   
   #記事articlesから見たらuserは1つ
@@ -57,12 +50,4 @@ class Article < ApplicationRecord
     likes.count
   end
   
-  
-
-  private
-
-  def validate_title_and_content_length
-    word_count = title.length + content.length
-    errors.add(:content, '5文字以上にしてください！！') unless word_count > 5
-  end
 end
