@@ -14,6 +14,10 @@
 #  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
+  #記事のアイキャッチ
+  has_one_attached :eyecatch
+
+
   # バリデーションを追加
 
   # length文字の長さ
