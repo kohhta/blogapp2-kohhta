@@ -14,6 +14,10 @@
 #  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
+  #記事のアイキャッチ
+  has_one_attached :eyecatch
+
+
   # バリデーションを追加
 
   # length文字の長さ
@@ -37,6 +41,7 @@ class Article < ApplicationRecord
   #記事articlesから見たらuserは1つ
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   
   # 投稿日を日本語化
@@ -47,6 +52,11 @@ class Article < ApplicationRecord
   def author_name
     user.display_name
   end
+
+  def like_count
+    likes.count
+  end
+  
   
 
   private

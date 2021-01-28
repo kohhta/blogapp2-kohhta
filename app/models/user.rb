@@ -22,19 +22,28 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
 
-  #Userは記事コメントを沢山もっている,消えたら一緒にarticles消える
+  #Userは記事コメントlikeを沢山もっている,消えたら一緒にarticles消える
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  #likeしたarticleだけ取得
+  has_many :favorite_articles, through: :likes, source: :article
 
   has_one :profile,dependent: :destroy
 
   delegate :birthday, :gender, :age, to: :profile, allow_nil: true
 
-
   # Userが書いた記事だけ表示
   def has_written?(article)
     articles.exists?(id: article.id)
   end
+
+  # likeしたarticle_idはあるか?のメソッド
+  def has_liked?(article)
+    likes.exists?(article_id: article.id)
+  end
+  
 
   #userのemail先頭をdisplay_nameに
   def display_name
