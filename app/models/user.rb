@@ -25,6 +25,7 @@ class User < ApplicationRecord
   #Userは記事コメントを沢山もっている,消えたら一緒にarticles消える
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   has_one :profile,dependent: :destroy
 
