@@ -37,6 +37,12 @@ class User < ApplicationRecord
     articles.exists?(id: article.id)
   end
 
+  # likeしたarticle_idはあるか?のメソッド
+  def has_liked?(article)
+    likes.exists?(article_id: article.id)
+  end
+  
+
   #userのemail先頭をdisplay_nameに
   def display_name
     # if profile && profile.nickname
