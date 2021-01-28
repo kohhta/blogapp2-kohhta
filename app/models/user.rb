@@ -26,9 +26,11 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-
   #likeしたarticleだけ取得
   has_many :favorite_articles, through: :likes, source: :article
+
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :following
 
   has_one :profile,dependent: :destroy
 
@@ -77,5 +79,10 @@ class User < ApplicationRecord
         'default-avatar.png'
       end
     end
+
+    def follow!(user)
+      following_relationships.create!(following_id: user.id)
+    end
+    
     
 end
