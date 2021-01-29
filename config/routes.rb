@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   end
 
   resource :profile, only: [:show, :edit, :update]
-  
   resources :favorites, only: [:index]
+
+  resources :accounts,only: [:show,] do
+    resources :follows,only: [:create]
+    resources :unfollows, only: [:create]
+  end
   
 end
