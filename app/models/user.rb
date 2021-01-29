@@ -92,6 +92,4 @@ class User < ApplicationRecord
       relation.destroy!
     end
     
-    
-    
 end
