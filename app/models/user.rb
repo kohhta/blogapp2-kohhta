@@ -49,38 +49,9 @@ class User < ApplicationRecord
     likes.exists?(article_id: article.id)
   end
   
-
-  #userのemail先頭をdisplay_nameに
-  def display_name
-    # if profile && profile.nickname
-    #   profile.nickname
-    # else
-    #   self.email.split('@').first
-    # end
-
-    # ぼっち演算子 &. nillじゃない場合だけ実行
-    profile&.nickname || self.email.split('@').first
-  end
-
-  # def birthday 
-  #   profile&.birthday
-  # end
-
-  # def gender
-  #   profile&.gender
-  # end
-  
     #profile_controllerのedit
     def prepare_profile
       profile || build_profile
-    end
-
-    def avatar_image
-      if profile&.avatar&.attached? 
-        profile.avatar 
-      else
-        'default-avatar.png'
-      end
     end
 
     def follow!(user)
