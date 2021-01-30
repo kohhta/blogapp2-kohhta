@@ -53,6 +53,7 @@ class User < ApplicationRecord
     def prepare_profile
       profile || build_profile
     end
+    
 
     def follow!(user)
       user_id = get_user_id(user)
